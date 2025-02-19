@@ -57,7 +57,7 @@ export type GetSubscriberRankingPosition200 = {
 export const getSubscribeToEventUrl = () => {
 
 
-  return `http://localhost:3333/subscriptions`
+  return `https://db-dev-stage.vercel.app/subscriptions`
 }
 
 export const subscribeToEvent = async (subscribeToEventBody: SubscribeToEventBody, options?: RequestInit): Promise<SubscribeToEvent201> => {
@@ -86,7 +86,7 @@ export const subscribeToEvent = async (subscribeToEventBody: SubscribeToEventBod
 export const getAccessInviteLinkUrl = (subscriberId: string,) => {
 
 
-  return `http://localhost:3333/invites/${subscriberId}`
+  return `https://db-dev-stage.vercel.app/invites/${subscriberId}`
 }
 
 export const accessInviteLink = async (subscriberId: string, options?: RequestInit): Promise<unknown> => {
@@ -114,7 +114,7 @@ export const accessInviteLink = async (subscriberId: string, options?: RequestIn
 export const getGetRankingUrl = () => {
 
 
-  return `http://localhost:3333/ranking`
+  return `https://db-dev-stage.vercel.app/ranking`
 }
 
 export const getRanking = async ( options?: RequestInit): Promise<GetRanking200> => {
@@ -142,7 +142,7 @@ export const getRanking = async ( options?: RequestInit): Promise<GetRanking200>
 export const getGetSubscriberInviteCountUrl = (subscriberId: string,) => {
 
 
-  return `http://localhost:3333/subscribers/${subscriberId}/ranking/count`
+  return `https://db-dev-stage.vercel.app/subscribers/${subscriberId}/ranking/count`
 }
 
 export const getSubscriberInviteCount = async (subscriberId: string, options?: RequestInit): Promise<GetSubscriberInviteCount200> => {
@@ -170,7 +170,7 @@ export const getSubscriberInviteCount = async (subscriberId: string, options?: R
 export const getGetSubscriberInviteClicksUrl = (subscriberId: string,) => {
 
 
-  return `http://localhost:3333/subscribers/${subscriberId}/ranking/clicks`
+  return `https://db-dev-stage.vercel.app/subscribers/${subscriberId}/ranking/clicks`
 }
 
 export const getSubscriberInviteClicks = async (subscriberId: string, options?: RequestInit): Promise<GetSubscriberInviteClicks200> => {
@@ -198,7 +198,7 @@ export const getSubscriberInviteClicks = async (subscriberId: string, options?: 
 export const getGetSubscriberRankingPositionUrl = (subscriberId: string,) => {
 
 
-  return `http://localhost:3333/subscribers/${subscriberId}/ranking/position`
+  return `https://db-dev-stage.vercel.app/subscribers/${subscriberId}/ranking/position`
 }
 
 export const getSubscriberRankingPosition = async (subscriberId: string, options?: RequestInit): Promise<GetSubscriberRankingPosition200> => {
