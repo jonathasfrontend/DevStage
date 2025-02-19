@@ -2,10 +2,12 @@
 
 import Button from "@/components/Button";
 import { InputRoot, InputIcon, InputField } from "@/components/Input";
-import { User, ArrowRight } from "lucide-react";
+import { User, ArrowRight, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
+import { subscribeToEvent } from "@/http/api";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const subscriptionSchema = z.object({
     name: z.string().min(2, 'Digite o nome completo'),
@@ -15,21 +17,25 @@ const subscriptionSchema = z.object({
 type SubscriptionSchema = z.infer<typeof subscriptionSchema>
 
 export function SubscriptionForm() {
-    const { 
+    const router = useRouter()
+    const searchParams = useSearchParams()
+
+    const {
         register,
         handleSubmit,
-        formState: { errors } 
+        formState: { errors }
     } = useForm<SubscriptionSchema>({
         resolver: zodResolver(subscriptionSchema),
     });
 
-    function onSubscribe(data: SubscriptionSchema) {
-
-        console.log(data);
+    async function onSubscribe({ email, name }: SubscriptionSchema) {
+        const referrer = searchParams.get('referrer')
+        const { subscriberId } = await subscribeToEvent({ email, name, referrer })
+        router.push(`/invite/${subscriberId}`)
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubscribe)} className="w-full md:max-w-[440px] bg-gray-700 border border-gray-600 rounded-2xl p-8 spac-y-6">
+        <form onSubmit={handleSubmit(onSubscribe)} className="w-full md:max-w-[440px] bg-gray-700 border border-gray-600 rounded-2xl p-8 space-y-6">
             <h2 className="font-heading font-semibold text-gray-200 text-xl">
                 Inscrição
             </h2>
@@ -49,11 +55,11 @@ export function SubscriptionForm() {
                         </div>
                     )}
                 </div>
-                
+
                 <div className="space-y-2">
                     <InputRoot>
                         <InputIcon>
-                            <User className='' />
+                            <Mail className='' />
                         </InputIcon>
                         <InputField {...register('email')} type='email' placeholder="E-mail" />
                     </InputRoot>
